@@ -25,19 +25,15 @@ public class WordGameModel implements Serializable {
     public WordGameModel() {
         initGame();
     }
-    
-    // Khởi tạo trò chơi mới
+
     public void initGame() {
-        // Chọn từ bí mật ngẫu nhiên
         Random random = new Random();
         secretWord = SECRET_WORDS.get(random.nextInt(SECRET_WORDS.size()));
-        
-        // Khởi tạo trạng thái hiện tại của từ đang đoán
+
         currentGuess = new char[secretWord.length()];
         Arrays.fill(currentGuess, '_');
-        
-        // Khởi tạo các giá trị khác
-        remainingGuesses = 6; // Số lần đoán tối đa
+
+        remainingGuesses = 6;
         guessedWords = new ArrayList<>();
         gameOver = false;
         won = false;

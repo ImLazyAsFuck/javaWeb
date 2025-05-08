@@ -8,7 +8,7 @@
 <form action="/forward-servlet" method="post">
   Họ tên: <input type="text" name="fullname"><br>
   Tuổi: <input type="number" name="age"><br>
-  <input type="submit" value="Gửi đi">
+  <button type="submit" value="Gửi đi"></button>
 </form>
 </body>
 </html>
