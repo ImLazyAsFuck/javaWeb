@@ -15,10 +15,22 @@ import jakarta.servlet.http.HttpServletResponse;
 public class BookServlet extends HttpServlet{
     public List<Book> books = new ArrayList<>();
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        req.setAttribute("books", books);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String keyword = req.getParameter("search");
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            List<Book> filtered = new ArrayList<>();
+            for (Book b : books) {
+                if (b.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+                    filtered.add(b);
+                }
+            }
+            req.setAttribute("books", filtered);
+        } else {
+            req.setAttribute("books", books);
+        }
         req.getRequestDispatcher("home.jsp").forward(req, resp);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{

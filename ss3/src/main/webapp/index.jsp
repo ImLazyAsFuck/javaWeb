@@ -13,6 +13,8 @@
     <a href="b5.jsp"><h1>B5</h1></a>
     <a href="b6.jsp"><h1>B6</h1></a>
     <a href="b7.jsp"><h1>B7</h1></a>
-    <a href="home.jsp"><h1>B8</h1></a>
+    <a href="home"><h1>B8</h1></a>
+    <a href="list-user"><h1>B9</h1></a>
+    <a href="product"><h1>B10</h1></a>
 </body>
 </html>

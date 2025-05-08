@@ -19,10 +19,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             padding: 40px 20px;
-            gap: 30px;
+            flex-direction: column;
+            gap: 20px;
         }
+
+
 
         form {
             background: #fff;
@@ -110,6 +112,7 @@
 
 </head>
 <body>
+
 <form method="POST" action="home">
     <h2>Thêm sách</h2>
     <label>
