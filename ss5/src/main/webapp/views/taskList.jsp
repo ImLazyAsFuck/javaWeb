@@ -7,16 +7,14 @@
     <script>
         function completeTask(checkbox, formId) {
             if (checkbox.checked) {
-                // Disable checkbox immediately before any other actions
                 checkbox.disabled = true;
                 checkbox.setAttribute('disabled', 'disabled');
-                
-                // Set a small timeout to make the UI update visible before form submission
+
                 setTimeout(function() {
                     document.getElementById(formId).submit();
                 }, 10);
                 
-                return false; // Prevent any default behavior
+                return false;
             }
         }
         
@@ -29,7 +27,7 @@
     </script>
 </head>
 <body class="bg-gray-100 p-8">
-<div class="max-w-4xl mx-auto bg-white rounded shadow-md overflow-hidden">
+<div class="max-w-4xl mx-auto bg-white rounded shadow-md">
     <div class="p-4 flex justify-between items-center bg-blue-50">
         <h1 class="text-xl font-semibold text-blue-600">Task List</h1>
         <a href="/tasks?action=add" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
@@ -96,6 +94,6 @@
         </c:choose>
         </tbody>
     </table>
+    <button onclick="window.location.href='/index.jsp'" class="bg-blue-500 w-[90%] m-2 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm ">Back</button>
 </div>
 </body>
-</html>

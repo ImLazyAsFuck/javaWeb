@@ -5,6 +5,8 @@ import com.example.ss5.utils.DBConnect;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -139,4 +141,36 @@ public class StudentDAOImp implements StudentDAO{
             DBConnect.closeConnection(con, cs);
         }
     }
+    
+    @Override
+    public Student findById(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        Student student = null;
+        try {
+            con = DBConnect.getConnection();
+            ps = con.prepareStatement("SELECT id, name, age, address FROM student WHERE id = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                student = new Student();
+                student.setId(rs.getInt("id"));
+                student.setName(rs.getString("name"));
+                student.setAge(rs.getInt("age"));
+                student.setAddress(rs.getString("address"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (con != null) con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return student;
+    }
+    
+
 }

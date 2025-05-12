@@ -10,8 +10,7 @@
             if (checkbox.checked) {
                 checkbox.disabled = true;
                 checkbox.setAttribute('disabled', 'disabled');
-
-                var hiddenInput = document.createElement('input');
+                const hiddenInput = document.createElement('input');
                 hiddenInput.type = 'hidden';
                 hiddenInput.name = 'completed';
                 hiddenInput.value = 'on';

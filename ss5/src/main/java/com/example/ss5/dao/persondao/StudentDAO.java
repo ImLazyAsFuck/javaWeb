@@ -11,4 +11,5 @@ public interface StudentDAO{
     boolean delete(int id);
     boolean update(Student student);
     int count();
+    Student findById(int id);
 }

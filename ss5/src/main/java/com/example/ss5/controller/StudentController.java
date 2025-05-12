@@ -1,8 +1,8 @@
 package com.example.ss5.controller;
 
 import com.example.ss5.model.Student;
-import com.example.ss5.service.personservice.StudentService;
-import com.example.ss5.service.personservice.StudentServiceImp;
+import com.example.ss5.service.studentservice.StudentService;
+import com.example.ss5.service.studentservice.StudentServiceImp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -123,13 +123,20 @@ public class StudentController extends HttpServlet {
     }
 
     private void showEditForm(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        Student student = new Student();
-        student.setId(id);
-        
-        req.setAttribute("student", student);
-        req.setAttribute("editMode", true);
-        req.getRequestDispatcher("/views/studentForm.jsp").forward(req, res);
+        String idStr = req.getParameter("id");
+        try {
+            int id = Integer.parseInt(idStr);
+            Student student = studentService.findById(id);
+            if (student != null) {
+                req.setAttribute("student", student);
+                req.getRequestDispatcher("/views/studentEditForm.jsp").forward(req, res);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // If we get here, there was an error
+        res.sendRedirect(req.getContextPath() + "/student/list");
     }
 
     private void deleteStudent(HttpServletRequest req, HttpServletResponse res) throws IOException {
