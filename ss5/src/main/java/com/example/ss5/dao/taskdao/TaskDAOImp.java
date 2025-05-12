@@ -41,12 +41,11 @@ public class TaskDAOImp implements TaskDAO{
         CallableStatement cs = null;
         try{
             con = DBConnect.getConnection();
-            cs = con.prepareCall("{call save_task(?,?)}");
+            cs = con.prepareCall("{call save_task(?)}");
             cs.setString(1, task.getName());
-            cs.setString(2, task.getName());
             return cs.executeUpdate() > 0;
         }catch(Exception e){
-            e.fillInStackTrace();
+            e.printStackTrace();
         }finally{
             DBConnect.closeConnection(con, cs);
         }
