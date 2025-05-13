@@ -63,6 +63,6 @@
     </c:forEach>
     </tbody>
 </table>
-<a href="/index.jsp">back</a>
+<a href="/views/index.jsp">back</a>
 </body>
 </html>
