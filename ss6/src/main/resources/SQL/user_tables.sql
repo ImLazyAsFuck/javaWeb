@@ -21,19 +21,19 @@ end //
 drop procedure if exists find_user_by_username;
 create procedure find_user_by_username(in p_username varchar(50))
 begin
-    select * from users where username = p_username and status = true;
+    select id, username, password, email, phone, status, created_at from users where username = p_username and status = true;
 end //
 
 drop procedure if exists find_user_by_email;
 create procedure find_user_by_email(in p_email varchar(100))
 begin
-    select * from users where email = p_email and status = true;
+    select id, username, password, email, phone, status, created_at from users where email = p_email and status = true;
 end //
 
 drop procedure if exists find_all_users;
 create procedure find_all_users()
 begin
-    select * from users;
+    select id, username, password, email, phone, status, created_at from users;
 end //
 
 drop procedure if exists update_user_status;
