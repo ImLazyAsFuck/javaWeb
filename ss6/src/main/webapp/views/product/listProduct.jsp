@@ -10,6 +10,7 @@
         <div class="header">
             <h1>Products</h1>
             <a href="/cart" class="cart-link">View Cart</a>
+            <a href="/index.jsp">Back</a>
         </div>
         
         <div class="product-grid">

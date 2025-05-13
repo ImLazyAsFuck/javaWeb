@@ -11,3 +11,4 @@ public interface ProductCartService {
     boolean clearCart(String sessionId);
     double getCartTotal(String sessionId);
 }
+

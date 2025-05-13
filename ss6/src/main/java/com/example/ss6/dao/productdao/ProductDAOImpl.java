@@ -20,12 +20,7 @@ public class ProductDAOImpl implements ProductDAO {
             cs = con.prepareCall("{call find_all_products()}");
             ResultSet rs = cs.executeQuery();
             while (rs.next()) {
-                Product product = new Product();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setPrice(rs.getDouble("price"));
-                product.setImageUrl(rs.getString("image_url"));
-                products.add(product);
+                products.add(extractProductFromResultSet(rs));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,11 +41,7 @@ public class ProductDAOImpl implements ProductDAO {
             cs.setInt(1, id);
             ResultSet rs = cs.executeQuery();
             if (rs.next()) {
-                product = new Product();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setPrice(rs.getDouble("price"));
-                product.setImageUrl(rs.getString("image_url"));
+                product = extractProductFromResultSet(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +61,13 @@ public class ProductDAOImpl implements ProductDAO {
             cs.setString(1, product.getName());
             cs.setDouble(2, product.getPrice());
             cs.setString(3, product.getImageUrl());
-            return cs.executeUpdate() > 0;
+            
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                product.setId(id);
+                return id > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -90,7 +87,11 @@ public class ProductDAOImpl implements ProductDAO {
             cs.setString(2, product.getName());
             cs.setDouble(3, product.getPrice());
             cs.setString(4, product.getImageUrl());
-            return cs.executeUpdate() > 0;
+            
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("affected_rows") > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -107,12 +108,25 @@ public class ProductDAOImpl implements ProductDAO {
             con = DBConnect.getConnection();
             cs = con.prepareCall("{call delete_product(?)}");
             cs.setInt(1, id);
-            return cs.executeUpdate() > 0;
+            
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("affected_rows") > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             DBConnect.closeConnection(con, cs);
         }
         return false;
+    }
+
+    private Product extractProductFromResultSet(ResultSet rs) throws Exception {
+        Product product = new Product();
+        product.setId(rs.getInt("id"));
+        product.setName(rs.getString("name"));
+        product.setPrice(rs.getDouble("price"));
+        product.setImageUrl(rs.getString("image_url"));
+        return product;
     }
 }

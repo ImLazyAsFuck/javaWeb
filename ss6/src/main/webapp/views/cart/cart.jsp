@@ -63,7 +63,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                
                 <div class="cart-total">
                     <div class="total-label">Total:</div>
                     <div class="total-value">

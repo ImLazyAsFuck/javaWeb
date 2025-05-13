@@ -82,7 +82,11 @@ public class ProductCartDAOImpl implements ProductCartDAO {
             cs.setString(1, productCart.getSessionId());
             cs.setInt(2, productCart.getProductId());
             cs.setInt(3, productCart.getQuantity());
-            return cs.executeUpdate() > 0;
+            
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("affected_rows") > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -100,7 +104,11 @@ public class ProductCartDAOImpl implements ProductCartDAO {
             cs = con.prepareCall("{call update_cart_quantity(?, ?)}");
             cs.setInt(1, id);
             cs.setInt(2, quantity);
-            return cs.executeUpdate() > 0;
+            
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("affected_rows") > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -117,7 +125,11 @@ public class ProductCartDAOImpl implements ProductCartDAO {
             con = DBConnect.getConnection();
             cs = con.prepareCall("{call remove_from_cart(?)}");
             cs.setInt(1, id);
-            return cs.executeUpdate() > 0;
+            
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("affected_rows") > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -134,7 +146,11 @@ public class ProductCartDAOImpl implements ProductCartDAO {
             con = DBConnect.getConnection();
             cs = con.prepareCall("{call clear_cart(?)}");
             cs.setString(1, sessionId);
-            return cs.executeUpdate() > 0;
+            
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("affected_rows") > 0;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
