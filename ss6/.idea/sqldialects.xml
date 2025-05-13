@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/resources/SQL/book_example_data.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/SQL/book_tables.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/SQL/employees_example_data.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/SQL/employees_table.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/SQL/products_tables.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/SQL/user_tables.sql" dialect="MySQL" />
+  </component>
+</project>
