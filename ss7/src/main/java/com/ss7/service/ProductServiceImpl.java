@@ -8,32 +8,32 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> findAll(){
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
 
     @Override
-    public Product findById(int id){
+    public Product findById(int id) {
         return productRepository.findById(id);
     }
 
     @Override
-    public boolean save(Product product){
+    public boolean save(Product product) {
         return productRepository.save(product);
     }
 
     @Override
-    public boolean deleteById(int id){
+    public boolean deleteById(int id) {
         return productRepository.deleteById(id);
     }
 
     @Override
-    public boolean update(Product product){
-        return false;
+    public boolean update(Product product) {
+        return productRepository.update(product);
     }
 }

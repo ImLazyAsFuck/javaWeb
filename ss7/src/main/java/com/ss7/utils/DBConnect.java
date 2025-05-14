@@ -1,4 +1,4 @@
-package com.ss7.dao;
+package com.ss7.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
