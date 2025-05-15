@@ -67,7 +67,7 @@
                         <p class="text-lg text-gray-700 mb-2">
                             💰 Giá: <span class="text-red-600 font-bold">$${seed.price}</span>
                         </p>
-                            <form hidden="hidden" action="game/shop">
+                            <form action="/game/shop" method="post">
                                 <input type="hidden" name="id" value="${seed.id}">
                                 <input type="hidden" name="price" value="${seed.price}">
                                 <input type="hidden" name="seedsName" value="${seed.seedsName}">

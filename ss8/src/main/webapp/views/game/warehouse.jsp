@@ -30,7 +30,7 @@
             <div class="seed-card text-center border rounded-lg bg-white shadow-lg p-6">
                 <img src="${entry.seeds.imageUrl}" alt="${entry.seeds.seedsName}" class="w-32 h-32 mx-auto mb-4">
                 <h3 class="text-lg font-bold text-green-800">${entry.seeds.seedsName}</h3>
-                <p class="text-gray-600 text-sm">Giá: ${entry.seeds.price} VND</p>
+                <p class="text-gray-600 text-sm">Giá: ${entry.seeds.price}</p>
                 <p class="text-yellow-700 font-semibold">Số lượng: ${entry.quantity}</p>
             </div>
         </c:forEach>
