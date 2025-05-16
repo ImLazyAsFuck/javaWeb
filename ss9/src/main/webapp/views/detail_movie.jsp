@@ -57,7 +57,7 @@
 </body>
 <script>
     function handleClick(id) {
-        // window.location.href = "/room/" + id;
+        window.location.href = "/schedule/" + id;
     }
 </script>
 </html>

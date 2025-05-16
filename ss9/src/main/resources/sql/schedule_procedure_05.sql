@@ -18,4 +18,10 @@ begin
     where m_id = in_m_id;
 end //
 
+create procedure get_schedule_by_id(id bigint)
+begin
+    select sc_id, m_id, sc_show_time, sr_id, sc_available_seats, sc_format from schedule
+        where sc_id = id;
+end //
+
 delimiter ;

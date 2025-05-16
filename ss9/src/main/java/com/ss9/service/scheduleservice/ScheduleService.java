@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface ScheduleService {
     List<Schedule> findAll();
-    List<Schedule> findAllScheduleByMovie(String movieTitle);
+    Schedule findById(long id);
     List<Schedule> findAllByMovieId(Long movieId);
 }

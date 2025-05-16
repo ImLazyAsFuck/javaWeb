@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface ScheduleRepository {
     List<Schedule> findAll();
-    List<Schedule> findAllByMovie(String movieTitle);
+    Schedule findById(long id);
     List<Schedule> findAllByMovieId(Long movieId);
 }

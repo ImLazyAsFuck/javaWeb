@@ -19,9 +19,10 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public List<Schedule> findAllScheduleByMovie(String movieTitle) {
-        return scheduleRepository.findAllByMovie(movieTitle);
+    public Schedule findById(long id){
+        return scheduleRepository.findById(id);
     }
+
 
     @Override
     public List<Schedule> findAllByMovieId(Long movieId){
