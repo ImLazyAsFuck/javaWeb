@@ -1,0 +1,71 @@
+package com.ss9.repository.movierepository;
+
+import com.ss9.model.Movie;
+import com.ss9.utils.DBConnect;
+import org.springframework.stereotype.Repository;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+@Repository
+public class MovieRepositoryImpl implements MovieRepository{
+    @Override
+    public List<Movie> findAll(){
+        Connection con = null;
+        CallableStatement cs = null;
+        List<Movie> movies = new ArrayList<>();
+        try{
+            con = DBConnect.getConnection();
+            cs = con.prepareCall("{call get_all_movie()}");
+            ResultSet result = cs.executeQuery();
+            System.out.println(result);
+            while(result.next()){
+                Movie movie = new Movie();
+                movie.setId(result.getLong("id"));
+                movie.setTitle(result.getString("title"));
+                movie.setDirector(result.getString("director"));
+                movie.setGenre(result.getString("genre"));
+                movie.setLanguage(result.getString("language"));
+                movie.setDescription(result.getString("description"));
+                movie.setDuration(result.getInt("duration"));
+                movies.add(movie);
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
+        }finally{
+            DBConnect.closeConnection(con, cs);
+        }
+        return movies;
+    }
+
+    @Override
+    public Movie findById(Long id){
+        Connection con = null;
+        CallableStatement cs = null;
+        Movie movie = null;
+        try{
+            con = DBConnect.getConnection();
+            cs = con.prepareCall("{call get_movie_by_id(?)}");
+            cs.setLong(1, id);
+            ResultSet result = cs.executeQuery();
+            while(result.next()){
+                movie = new Movie();
+                movie.setId(result.getLong("id"));
+                movie.setTitle(result.getString("title"));
+                movie.setDirector(result.getString("director"));
+                movie.setGenre(result.getString("genre"));
+                movie.setLanguage(result.getString("language"));
+                movie.setDescription(result.getString("description"));
+                movie.setDuration(result.getInt("duration"));
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
+        }finally{
+            DBConnect.closeConnection(con, cs);
+        }
+        return movie;
+    }
+}

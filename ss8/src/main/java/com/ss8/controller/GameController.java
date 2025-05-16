@@ -161,6 +161,11 @@ public class GameController{
             mv.setViewName("redirect:/game/farm");
             return mv;
         }
+        if(seedId.isEmpty()){
+            mv.addObject("message", "Please select a seed!");
+            mv.setViewName("redirect:/game/farm");
+            return mv;
+        }
         plot.get().setSeeds(seed.get().getSeeds());
         seed.get().setQuantity(seed.get().getQuantity() - 1);
         if(seed.get().getQuantity() == 0){
