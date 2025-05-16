@@ -8,5 +8,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/sql/schedule_procedure_05.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sql/screen_room_procedure_04.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/sql/seat_procedure_06.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sql/ticket_procedure_07.sql" dialect="MySQL" />
   </component>
 </project>
