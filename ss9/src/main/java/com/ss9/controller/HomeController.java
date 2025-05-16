@@ -1,6 +1,7 @@
 package com.ss9.controller;
 
 import com.ss9.service.movieservice.MovieService;
+import com.ss9.service.scheduleservice.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ public class HomeController{
 
     @Autowired
     MovieService movieService;
+    @Autowired
+    ScheduleService scheduleService;
 
     @GetMapping("/home")
     public ModelAndView home(){
@@ -24,6 +27,7 @@ public class HomeController{
     @GetMapping("/detail/{id}")
     public ModelAndView detail(@PathVariable Long id){
         return new ModelAndView("detail_movie")
-                .addObject("movie", movieService.findById(id));
+                .addObject("movie", movieService.findById(id))
+                .addObject("schedules", scheduleService.findAllByMovieId(id));
     }
 }

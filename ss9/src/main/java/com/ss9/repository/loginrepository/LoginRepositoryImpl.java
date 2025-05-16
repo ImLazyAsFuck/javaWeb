@@ -23,13 +23,13 @@ public class LoginRepositoryImpl implements LoginRepository{
             ResultSet rs = cs.executeQuery();
             while(rs.next()){
                 result = new Customer();
-                result.setId(rs.getLong("id"));
-                result.setUsername(rs.getString("username"));
-                result.setPassword(rs.getString("password"));
-                result.setPhone(rs.getString("phone"));
-                result.setAddress(rs.getString("address"));
-                result.setGender(Gender.valueOf(rs.getString("gender")));
-                result.setEmail(rs.getString("email"));
+                result.setId(rs.getLong("c_id"));
+                result.setUsername(rs.getString("c_username"));
+                result.setPassword(rs.getString("c_password"));
+                result.setPhone(rs.getString("c_phone"));
+                result.setAddress(rs.getString("c_address"));
+                result.setGender(Gender.valueOf(rs.getString("c_gender")));
+                result.setEmail(rs.getString("c_email"));
             }
         }catch(Exception e){
             e.fillInStackTrace();

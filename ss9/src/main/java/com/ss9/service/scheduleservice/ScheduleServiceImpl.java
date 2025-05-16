@@ -22,4 +22,9 @@ public class ScheduleServiceImpl implements ScheduleService{
     public List<Schedule> findAllScheduleByMovie(String movieTitle) {
         return scheduleRepository.findAllByMovie(movieTitle);
     }
+
+    @Override
+    public List<Schedule> findAllByMovieId(Long movieId){
+        return scheduleRepository.findAllByMovieId(movieId);
+    }
 }

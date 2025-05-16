@@ -24,13 +24,13 @@ public class MovieRepositoryImpl implements MovieRepository{
             System.out.println(result);
             while(result.next()){
                 Movie movie = new Movie();
-                movie.setId(result.getLong("id"));
-                movie.setTitle(result.getString("title"));
-                movie.setDirector(result.getString("director"));
-                movie.setGenre(result.getString("genre"));
-                movie.setLanguage(result.getString("language"));
-                movie.setDescription(result.getString("description"));
-                movie.setDuration(result.getInt("duration"));
+                movie.setId(result.getLong("m_id"));
+                movie.setTitle(result.getString("m_title"));
+                movie.setDirector(result.getString("m_director"));
+                movie.setGenre(result.getString("m_genre"));
+                movie.setLanguage(result.getString("m_language"));
+                movie.setDescription(result.getString("m_description"));
+                movie.setDuration(result.getInt("m_duration"));
                 movies.add(movie);
             }
         }catch(Exception e){
@@ -53,13 +53,13 @@ public class MovieRepositoryImpl implements MovieRepository{
             ResultSet result = cs.executeQuery();
             while(result.next()){
                 movie = new Movie();
-                movie.setId(result.getLong("id"));
-                movie.setTitle(result.getString("title"));
-                movie.setDirector(result.getString("director"));
-                movie.setGenre(result.getString("genre"));
-                movie.setLanguage(result.getString("language"));
-                movie.setDescription(result.getString("description"));
-                movie.setDuration(result.getInt("duration"));
+                movie.setId(result.getLong("m_id"));
+                movie.setTitle(result.getString("m_title"));
+                movie.setDirector(result.getString("m_director"));
+                movie.setGenre(result.getString("m_genre"));
+                movie.setLanguage(result.getString("m_language"));
+                movie.setDescription(result.getString("m_description"));
+                movie.setDuration(result.getInt("m_duration"));
             }
         }catch(Exception e){
             e.fillInStackTrace();

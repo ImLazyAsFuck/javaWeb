@@ -26,7 +26,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
             while(result.next()){
                 Schedule schedule = new Schedule();
                 schedule.setId(result.getLong("sc_id"));
-                schedule.setMovieTitle(result.getString("sc_movie_title"));
+                schedule.setMovieId(result.getLong("m_id"));
                 schedule.setShowTime(result.getDate("sc_show_time"));
                 schedule.setScreenRoomId(result.getLong("sr_id"));
                 schedule.setAvailableSeats(result.getInt("sc_available_seats"));
@@ -55,7 +55,36 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
             while(result.next()){
                 Schedule schedule = new Schedule();
                 schedule.setId(result.getLong("sc_id"));
-                schedule.setMovieId(result.getLong("sc_movie_title"));
+                schedule.setMovieId(result.getLong("m_id"));
+                schedule.setShowTime(result.getDate("sc_show_time"));
+                schedule.setScreenRoomId(result.getLong("sr_id"));
+                schedule.setAvailableSeats(result.getInt("sc_available_seats"));
+                schedule.setFormat(FormatSchedule.valueOf(result.getString("sc_format")));
+                schedules.add(schedule);
+            }
+        }catch(Exception e){
+            e.fillInStackTrace();
+            e.printStackTrace();
+        }finally{
+            DBConnect.closeConnection(con, cs);
+        }
+        return schedules;
+    }
+
+    @Override
+    public List<Schedule> findAllByMovieId(Long movieId){
+        Connection con = null;
+        CallableStatement cs = null;
+        List<Schedule> schedules = new ArrayList<>();
+        try{
+            con = DBConnect.getConnection();
+            cs = con.prepareCall("{call get_all_schedule_by_movie_id(?)}");
+            cs.setLong(1, movieId);
+            ResultSet result = cs.executeQuery();
+            while(result.next()){
+                Schedule schedule = new Schedule();
+                schedule.setId(result.getLong("sc_id"));
+                schedule.setMovieId(result.getLong("m_id"));
                 schedule.setShowTime(result.getDate("sc_show_time"));
                 schedule.setScreenRoomId(result.getLong("sr_id"));
                 schedule.setAvailableSeats(result.getInt("sc_available_seats"));

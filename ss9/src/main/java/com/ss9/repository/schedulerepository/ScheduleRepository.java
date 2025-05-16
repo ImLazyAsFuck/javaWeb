@@ -6,4 +6,5 @@ import java.util.List;
 public interface ScheduleRepository {
     List<Schedule> findAll();
     List<Schedule> findAllByMovie(String movieTitle);
+    List<Schedule> findAllByMovieId(Long movieId);
 }
