@@ -2,6 +2,7 @@ package com.ss9.controller;
 
 import com.ss9.service.movieservice.MovieService;
 import com.ss9.service.scheduleservice.ScheduleService;
+import com.ss9.service.screenroomservice.ScreenRoomService;
 import com.ss9.service.seatservice.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,8 @@ public class HomeController{
     MovieService movieService;
     @Autowired
     ScheduleService scheduleService;
-
+    @Autowired
+    ScreenRoomService screenRoomService;
     @Autowired
     SeatService seatService;
 
@@ -39,7 +41,7 @@ public class HomeController{
     public ModelAndView schedule(@PathVariable Long id){
         return new ModelAndView("schedule")
                 .addObject("schedule", scheduleService.findById(id))
-                .addObject("movie", movieService.findById(scheduleService.findById(id).getMovieId()));
-//                .addObject("seats", seatService.);
+                .addObject("movie", movieService.findById(scheduleService.findById(id).getMovieId()))
+                .addObject("screenRooms", screenRoomService.findById(scheduleService.findById(id).getScreenRoomId()));
     }
 }
