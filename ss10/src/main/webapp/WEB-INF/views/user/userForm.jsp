@@ -1,0 +1,23 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Asus
+  Date: 18/05/2025
+  Time: 10:29 CH
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<a href="/">back</a>
+    <form:form modelAttribute="user" method="post" action="/user">
+        <form:input path="name"/>
+        <form:input path="age"/>
+        <form:textarea path="address"/>
+        <form:button type="submit">Submit</form:button>
+    </form:form>
+</body>
+</html>
