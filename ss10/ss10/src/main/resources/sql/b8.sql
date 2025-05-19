@@ -1,42 +1,41 @@
 create database if not exists ss10;
 use ss10;
 
-DROP TABLE IF EXISTS Seat;
-CREATE TABLE Seat (
-                      seat_id INT AUTO_INCREMENT PRIMARY KEY,
-                      seat_number VARCHAR(10) NOT NULL
+drop table if exists ticket;
+
+create table ticket (
+                        ticket_id int auto_increment primary key,
+                        movie_title varchar(255) not null,
+                        show_time date not null,
+                        total_amount double not null,
+                        seats_id varchar(255) not null
 );
 
-CREATE TABLE Ticket (
-                        ticket_id INT AUTO_INCREMENT PRIMARY KEY,
-                        movie_title VARCHAR(255) NOT NULL,
-                        show_time DATETIME NOT NULL,
-                        total_amount DOUBLE NOT NULL
-);
+delimiter //
 
-
-CREATE TABLE Ticket_Seat (
-                             ticket_id INT NOT NULL,
-                             seat_id INT NOT NULL,
-                             PRIMARY KEY(ticket_id, seat_id),
-                             FOREIGN KEY (ticket_id) REFERENCES Ticket(ticket_id) ON DELETE CASCADE,
-                             FOREIGN KEY (seat_id) REFERENCES Seat(seat_id) ON DELETE CASCADE
-);
-
-DELIMITER $$
-
-CREATE PROCEDURE BookTicket (
-    IN p_movieTitle VARCHAR(255),
-    IN p_showTime DATETIME,
-    IN p_totalAmount DOUBLE
+drop procedure if exists book_ticket;
+create procedure book_ticket (
+    in p_movietitle varchar(255),
+    in p_showtime datetime,
+    in p_totalamount double,
+    in p_seats_id varchar(255)
 )
-BEGIN
-    -- Thêm vé mới vào bảng Ticket
-    INSERT INTO Ticket (movie_title, show_time, total_amount)
-    VALUES (p_movieTitle, p_showTime, p_totalAmount);
+begin
+    insert into ticket (movie_title, show_time, total_amount, seats_id)
+    values (p_movietitle, p_showtime, p_totalamount, p_seats_id);
+end //
 
-    -- Có thể thêm logic khác ở đây, ví dụ lấy ticket_id mới chèn
-    -- SET @last_ticket_id = LAST_INSERT_ID();
-END $$
+drop procedure if exists get_all_ticket;
+create procedure get_all_ticket ()
+begin
+    select ticket_id, movie_title, show_time, total_amount, seats_id from ticket;
+end //
 
-DELIMITER ;
+drop procedure if exists get_ticket_by_id;
+create procedure get_ticket_by_id(in_id int)
+begin
+    select ticket_id, movie_title, show_time, total_amount, seats_id from ticket
+    where ticket_id = in_id;
+end //
+
+delimiter ;

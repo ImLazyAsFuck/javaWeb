@@ -8,5 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Seat{
-    
+    private int id;
+    private String seatNumber;
+    private boolean status;
+    private double price;
 }
