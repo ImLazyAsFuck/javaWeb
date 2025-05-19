@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class UploadController{
         return "upload/uploadForm";
     }
 
-    @GetMapping("/result")
+    @PostMapping("/result")
     public String result(@ModelAttribute UploadFile uploadFile, Model model) throws IOException{
         Map<String, Object> result = cloudinary.uploader().upload(uploadFile.getFile().getBytes(), ObjectUtils.emptyMap());
         model.addAttribute("fileUrl", result.get("secure_url")).addAttribute("description", uploadFile.getDescription());

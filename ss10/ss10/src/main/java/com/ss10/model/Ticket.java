@@ -4,14 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Project{
+@NoArgsConstructor
+public class Ticket{
     private int id;
-    private String name;
-    private String description;
-    private String documents;
+    private String movieTitle;
+    private Date showTime;
+    private double totalAmount;
+    private List<Seat> seats;
 }

@@ -10,5 +10,4 @@ public interface DocumentDAO{
     Document findByTitle(String title);
     boolean save(String title, String description, String file);
     boolean delete(int id);
-
 }

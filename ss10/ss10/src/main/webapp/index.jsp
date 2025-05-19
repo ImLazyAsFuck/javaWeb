@@ -12,5 +12,6 @@
 <a href="/profile">B4</a>
 <a href="/document">B5</a>
 <a href="/upload">B6</a>
+<a href="/project">B7</a>
 </body>
 </html>
