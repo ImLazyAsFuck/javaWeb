@@ -45,7 +45,7 @@ public class B123456Controller{
             return "/b123456/register";
         }
 
-        return "redirect:/b123456/home";
+        return "redirect:/b123456/result";
     }
 
 
