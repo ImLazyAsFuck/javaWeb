@@ -5,6 +5,7 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
+<a href="https://drive.google.com/file/d/1ifIrOgVi7MEjWLeo5FVdxlV94HLprR_7/view?usp=drive_link">link video</a>
 <h1>SS11</h1>
 <a href="/b123456">B1-2-3-4-5-6</a>
 <a href="/b7/rate">B7</a>
