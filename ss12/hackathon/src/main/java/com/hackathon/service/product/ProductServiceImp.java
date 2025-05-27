@@ -41,4 +41,9 @@ public class ProductServiceImp implements ProductService{
     public List<Product> findProductByName(String name){
         return productRepository.findProductByName(name);
     }
+
+    @Override
+    public boolean existsByName(String name){
+        return productRepository.existsByName(name);
+    }
 }

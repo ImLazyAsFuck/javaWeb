@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
   <title>Product Form</title>
@@ -11,7 +11,7 @@
 <div class="max-w-xl mx-auto bg-white p-8 rounded shadow">
   <h1 class="text-2xl font-bold mb-6">Product Form</h1>
 
-  <form:form modelAttribute="product" action="/product/add" method="post" class="space-y-4">
+  <form:form modelAttribute="product" action="/product/add" acceptCharset="UTC-8" method="post" class="space-y-4">
 
     <div>
       <label class="block text-gray-700 font-semibold mb-1">Name</label>

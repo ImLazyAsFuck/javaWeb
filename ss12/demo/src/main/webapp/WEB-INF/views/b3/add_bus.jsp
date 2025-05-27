@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <html>
 <head>
@@ -10,7 +10,7 @@
 <div class="container mx-auto p-6">
     <h1 class="text-3xl font-bold text-center mb-6">Add Bus</h1>
     <div class="bg-white p-6 rounded-lg shadow-md">
-        <form:form modelAttribute="bus" action="/bus/add" enctype="multipart/form-data" method="post" cssClass="space-y-4">
+        <form:form modelAttribute="bus" action="/bus/add" acceptCharset="UTC-8" enctype="multipart/form-data" method="post" cssClass="space-y-4">
             <div>
                 <label class="block text-sm font-medium">License Plate</label>
                 <form:input path="licensePlate"  cssClass="w-full p-2 border rounded"/>

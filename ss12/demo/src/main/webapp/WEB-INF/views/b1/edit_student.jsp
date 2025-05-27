@@ -1,6 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <%--
   Created by IntelliJ IDEA.
@@ -16,7 +16,7 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-4xl">
     <h2 class="text-2xl font-semibold mb-6 text-gray-800">Edit Student</h2>
-    <form:form modelAttribute="student" action="/student/edit" method="post" class="space-y-4">
+    <form:form modelAttribute="student" acceptCharset="UTC-8" action="/student/edit" method="post" class="space-y-4">
         <form:input path="id" value="${student.id}" cssStyle="display: none"/>
         <div>
             <label class="block text-sm font-medium text-gray-700">Name</label>

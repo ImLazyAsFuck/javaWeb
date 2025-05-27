@@ -195,4 +195,22 @@ public class ProductRepositoryImpl implements ProductRepository{
         }
         return products;
     }
+
+    @Override
+    public boolean existsByName(String name){
+        Connection con = null;
+        CallableStatement cs = null;
+        try{
+            con = dataSource.getConnection();
+            cs = con.prepareCall("{call exists_product_by_name(?)}");
+            cs.setString(1, name);
+            ResultSet rs = cs.executeQuery();
+            if(rs.next()){
+                return rs.getInt("count") > 0;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

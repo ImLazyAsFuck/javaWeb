@@ -14,13 +14,14 @@ import javax.validation.constraints.*;
 public class ProductDTO{
     private int id;
 
+    @UniqueProductName()
     @NotBlank(message = "Product name cannot be empty")
     private String name;
 
     @DecimalMin(value = "0.01", message = "Product price must be greater than 0")
     private double price;
 
-    @NotNull(message = "Product image cannot be empty")
+    @NotEmptyMultipartFile(message = "Product image cannot be empty")
     private MultipartFile image;
 
     private String description;

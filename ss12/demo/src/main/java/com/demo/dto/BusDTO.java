@@ -29,7 +29,7 @@ public class BusDTO {
 
     private int totalSeat;
 
-    @NotNull(message = "Image file is required")
+    @NotEmptyMultipartFile(message = "Image cannot be empty")
     private MultipartFile image;
 
     private String currentImage;

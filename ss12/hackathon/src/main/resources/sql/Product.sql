@@ -72,4 +72,10 @@ begin
     select id, name, price, image, description, status, created_at from product where name like concat('%', p_name, '%');
 end //
 
+drop procedure if exists is_name_exists;
+create procedure is_name_exists(p_name varchar(150))
+begin
+    select count(name) 'count' from product where name = p_name;
+end //
+
 delimiter ;
