@@ -36,6 +36,6 @@ public class CategoryController {
                               Model model) {
         categoryServiceImpl.saveCategory(categoryNameVi, descriptionVi, categoryNameEn, descriptionEn);
         model.addAttribute("categories", categoryServiceImpl.getAllCategories(LocaleContextHolder.getLocale()));
-        return "redirect:category";
+        return "redirect:/category";
     }
 }

@@ -19,7 +19,7 @@
 
 <h2><spring:message code="title" /></h2>
 
-<form action="/category/add" method="post">
+<form action="${pageContext.request.contextPath}/category/add" method="post">
     <label><spring:message code="category.name" /> (VI):</label>
     <input type="text" name="categoryNameVi" />
 
