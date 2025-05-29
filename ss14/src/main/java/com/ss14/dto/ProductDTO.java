@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 public class ProductDTO{
     private int id;
 
+    @UniqueProductNameInCookie
     @NotBlank(message = "Product name can't be empty")
     private String name;
 

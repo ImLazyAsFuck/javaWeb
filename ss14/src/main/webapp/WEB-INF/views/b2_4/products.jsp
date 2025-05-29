@@ -14,6 +14,7 @@
 <body>
 <a href="/">index</a>
 <a href="/product/add">add product</a>
+<a href="/cart/list">carts</a>
 <table border="1">
     <thead>
     <tr>
@@ -28,8 +29,9 @@
         <tr>
             <td>${product.id}</td>
             <td>${product.name}</td>
-            <td>${product.price}</td>
+            <td>${product.price} VND</td>
             <td>
+                <a href="/product/${product.id}">detail</a>
                 <a href="/product/delete/${product.id}">delete</a>
             </td>
         </tr>

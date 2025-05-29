@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Order{
-    private String orderId;
+@AllArgsConstructor
+public class UserSessionData{
     private String username;
-    private String productName;
-    private int quantity;
+    private List<Transaction> transactions = new ArrayList<>();
 }

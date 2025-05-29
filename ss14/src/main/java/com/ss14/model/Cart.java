@@ -7,11 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Order{
-    private String orderId;
-    private String username;
-    private String productName;
+@AllArgsConstructor
+public class Cart{
+    private int id;
+    private int productId;
     private int quantity;
 }

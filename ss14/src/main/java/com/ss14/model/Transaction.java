@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order{
-    private String orderId;
-    private String username;
-    private String productName;
-    private int quantity;
+@Setter
+public class Transaction{
+    private String description;
+    private double amount;
+    private String type;
 }

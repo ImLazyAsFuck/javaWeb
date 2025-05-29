@@ -1,4 +1,6 @@
-package com.ss14.model;
+package com.ss14.dto;
+
+import com.ss14.model.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,11 +9,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Order{
-    private String orderId;
-    private String username;
-    private String productName;
+@AllArgsConstructor
+public class CartDTO{
+    private int cartId;
+    private Product product;
     private int quantity;
 }
