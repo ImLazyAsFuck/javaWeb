@@ -5,6 +5,7 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
+<a href="https://drive.google.com/file/d/1dj2OIPguDTQNaySULKeQ2Y6U8BVSeN5J/view?usp=sharing">Link video</a>
 <h1>SS15</h1>
 <a href="/hello">B1</a>
 <a href="/student">B2</a>
