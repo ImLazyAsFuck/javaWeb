@@ -1,0 +1,14 @@
+package com.ss16.repository.bus;
+
+import com.ss16.model.bus.Bus;
+
+import java.util.List;
+
+public interface BusRepository{
+    List<Bus> findAll();
+    Bus findOne(Long id);
+    void save(Bus bus);
+    void delete(Long id);
+    void update(Bus bus);
+    boolean exists(String licenseplate);
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Trang Quản Lý Chung</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<div class="bg-white rounded-lg shadow-lg p-10 w-full max-w-xl flex flex-col">
+  <h1 class="text-3xl font-bold text-center mb-8 text-blue-700">Trang Quản Lý Chung</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+    <a th:href="@{/admin/bus}" class="group block bg-blue-100 rounded-lg p-6 text-center shadow hover:bg-blue-200 transition">
+      <div class="flex justify-center mb-4">
+        <svg class="w-12 h-12 text-blue-600 group-hover:text-blue-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16V6a2 2 0 012-2h12a2 2 0 012 2v10M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M4 16h16"></path>
+        </svg>
+      </div>
+      <div class="text-xl font-semibold text-blue-800 mb-2">Quản lý Xe Buýt</div>
+      <div class="text-gray-600">Thêm, sửa, xoá và xem danh sách xe buýt</div>
+    </a>
+    <a th:href="@{/admin/trip}" class="group block bg-green-100 rounded-lg p-6 text-center shadow hover:bg-green-200 transition">
+      <div class="flex justify-center mb-4">
+        <svg class="w-12 h-12 text-green-600 group-hover:text-green-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6"></path>
+        </svg>
+      </div>
+      <div class="text-xl font-semibold text-green-800 mb-2">Quản lý Chuyến Đi</div>
+      <div class="text-gray-600">Tạo, cập nhật, xoá và theo dõi chuyến đi</div>
+    </a>
+  </div>
+  <div class="mt-auto flex justify-center">
+    <form th:action="@{/logout}" method="get">
+      <button type="submit"
+              class="bg-red-500 text-white px-6 py-2 rounded-lg shadow hover:bg-red-600 transition font-semibold flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1"></path>
+        </svg>
+        Đăng xuất
+      </button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Danh sách xe buýt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+<div class="bg-white rounded-lg shadow-md p-6">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">Danh sách Xe Buýt</h2>
+        <a th:href="@{/admin/bus/add}"
+           class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-md shadow hover:bg-blue-700 transition">
+            <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
+            Thêm Xe Buýt
+        </a>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Biển số</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Loại xe</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Số ghế</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ảnh</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hành động</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+            <tr th:each="bus : ${buses}">
+                <td class="px-6 py-4 whitespace-nowrap" th:text="${bus.licensePlate}"></td>
+                <td class="px-6 py-4 whitespace-nowrap" th:text="${bus.busType}"></td>
+                <td class="px-6 py-4 whitespace-nowrap" th:text="${bus.totalSeat}"></td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <img th:if="${bus.image}" th:src="${bus.image}" class="h-12 w-12 object-cover rounded-md">
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap space-x-2">
+                    <a th:href="@{/admin/bus/edit?id={id}(id=${bus.id})}"
+                       class="text-blue-600 hover:text-blue-900">Sửa</a>
+                    <form th:action="@{/admin/bus/delete?id={id}(id=${bus.id})}" method="post" class="inline">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit"
+                                class="text-red-600 hover:text-red-900"
+                                onclick="return confirm('Bạn chắc chắn muốn xoá?')">Xoá</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="mt-4">
+            <a href="/admin/home" class="text-blue-600 hover:text-blue-900">Quay về trang chủ</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

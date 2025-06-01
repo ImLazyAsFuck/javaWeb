@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thêm chuyến xe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+<div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded shadow">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Thêm chuyến xe mới</h2>
+    <form th:action="@{/admin/trip/add}" th:object="${bustrip}" enctype="multipart/form-data" method="post" class="space-y-6">
+
+        <div>
+            <label class="block font-semibold mb-1">Điểm đi</label>
+            <input type="text" th:field="*{departure}"  class="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-500">
+            <div th:if="${#fields.hasErrors('departure')}" th:errors="*{departure}"></div>
+        </div>
+
+        <div>
+            <label class="block font-semibold mb-1">Điểm đến</label>
+            <input type="text" th:field="*{destination}" required class="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-500">
+            <div class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></div>
+        </div>
+
+        <div>
+            <label class="block font-semibold mb-1">Thời gian khởi hành</label>
+            <input type="datetime-local" th:field="*{departureTime}" class="w-full p-2 border rounded">
+            <div class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}"></div>
+        </div>
+
+        <div>
+            <label class="block font-semibold mb-1">Thời gian đến</label>
+            <input type="datetime-local" th:field="*{arrivalTime}" class="w-full p-2 border rounded">
+            <div class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('arrivalTime')}" th:errors="*{arrivalTime}"></div>
+        </div>
+
+        <div>
+            <label class="block font-semibold mb-1">Xe</label>
+            <select th:field="*{busId}" class="w-full p-2 border rounded">
+                <option th:each="bus : ${buses}" th:value="${bus.id}" th:text="${bus.licensePlate}"></option>
+            </select>
+            <div class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('busId')}" th:errors="*{busId}"></div>
+        </div>
+
+        <div>
+            <label class="block font-semibold mb-1">Số ghế trống</label>
+            <input type="number" th:field="*{seatsAvailable}" min="1" class="w-full p-2 border rounded">
+            <div class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('seatsAvailable')}" th:errors="*{seatsAvailable}"></div>
+        </div>
+
+        <div>
+            <label class="block font-semibold mb-1">Hình ảnh</label>
+            <input type="file" th:field="*{file}" accept="image/*" class="w-full p-2 border rounded">
+        </div>
+
+        <div class="flex gap-4">
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Lưu</button>
+            <a th:href="@{/admin/trip}" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Quay lại</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

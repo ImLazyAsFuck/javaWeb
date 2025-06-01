@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đăng nhập - Quản lý Xe & Đặt Vé</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-100 to-blue-300 min-h-screen flex items-center justify-center">
+
+<div class="bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full">
+    <h2 class="text-2xl font-bold text-blue-700 text-center mb-4">Đăng nhập hệ thống</h2>
+    <p class="text-sm text-gray-500 text-center mb-6">Quản lý xe & Đặt vé hành khách</p>
+
+    <form th:action="@{/login}" method="post" th:object="${user}" class="space-y-4">
+
+        <div>
+            <label for="username" class="block text-sm font-medium text-gray-700">Tên đăng nhập</label>
+            <input type="text" id="username" th:field="*{username}"
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                   >
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+               class="text-sm text-red-600 mt-1"></p>
+            <p th:if="${error}" class="text-sm text-red-600 mt-1">Tên đăng nhập hoặc mật khẩu không đúng</p>
+        </div>
+
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Mật khẩu</label>
+            <input type="password" id="password" th:field="*{password}"
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+               class="text-sm text-red-600 mt-1"></p>
+            <p th:if="${error}" class="text-sm text-red-600 mt-1">Tên đăng nhập hoặc mật khẩu không đúng</p>
+        </div>
+
+        <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition">
+            Đăng nhập
+        </button>
+    </form>
+
+    <div class="mt-6 text-sm text-center">
+        <span>Chưa có tài khoản?</span>
+        <a th:href="@{/register}" class="text-blue-600 hover:underline ml-1">Đăng ký</a>
+    </div>
+</div>
+
+</body>
+</html>
