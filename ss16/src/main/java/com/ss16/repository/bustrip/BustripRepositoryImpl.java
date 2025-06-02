@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class TripRepositoryImpl implements TripRepository{
+public class BustripRepositoryImpl implements BustripRepository{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

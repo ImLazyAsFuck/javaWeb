@@ -21,7 +21,7 @@
       <div class="text-xl font-semibold text-blue-800 mb-2">Quản lý Xe Buýt</div>
       <div class="text-gray-600">Thêm, sửa, xoá và xem danh sách xe buýt</div>
     </a>
-    <a th:href="@{/admin/trip}" class="group block bg-green-100 rounded-lg p-6 text-center shadow hover:bg-green-200 transition">
+    <a th:href="@{/admin/bustrip}" class="group block bg-green-100 rounded-lg p-6 text-center shadow hover:bg-green-200 transition">
       <div class="flex justify-center mb-4">
         <svg class="w-12 h-12 text-green-600 group-hover:text-green-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6"></path>
@@ -31,7 +31,9 @@
       <div class="text-gray-600">Tạo, cập nhật, xoá và theo dõi chuyến đi</div>
     </a>
   </div>
+
   <div class="mt-auto flex justify-center">
+
     <form th:action="@{/logout}" method="get">
       <button type="submit"
               class="bg-red-500 text-white px-6 py-2 rounded-lg shadow hover:bg-red-600 transition font-semibold flex items-center gap-2">

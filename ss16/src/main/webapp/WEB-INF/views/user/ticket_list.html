@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Danh sách vé xe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<body class="bg-gray-100 text-gray-900">
+<div class="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold mb-6">Danh sách vé đã đặt</h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-100">
+      <tr>
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Mã vé</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Chuyến xe</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Ngày đi</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Ghế</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Tổng tiền</th>
+        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Chi tiết</th>
+      </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+      <tr th:each="t : ${tickets}" class="hover:bg-gray-50">
+        <td class="px-4 py-2" th:text="${t.id}"></td>
+        <td class="px-4 py-2" th:text="${t.tripBusId}"></td>
+        <td class="px-4 py-2" th:text="${t.departureDate}"></td>
+        <td class="px-4 py-2" th:text="${t.listSeat}"></td>
+        <td class="px-4 py-2" th:text="${#numbers.formatDecimal(t.totalMoney, 1, 'COMMA', 2, 'POINT')}"></td>
+        <td class="px-4 py-2">
+          <a th:href="@{|/ticket/detail/${t.id}|}" class="inline-block px-3 py-1 text-sm text-white bg-blue-500 hover:bg-blue-600 rounded">Xem</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-6">
+    <a th:href="@{/home}" class="inline-block px-4 py-2 text-sm bg-gray-500 text-white hover:bg-gray-600 rounded">Về Home</a>
+  </div>
+</div>
+</body>
+
+</html>

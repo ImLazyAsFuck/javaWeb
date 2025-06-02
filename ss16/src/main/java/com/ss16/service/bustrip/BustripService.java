@@ -4,7 +4,7 @@ import com.ss16.model.bustrip.BusTrip;
 
 import java.util.List;
 
-public interface TripService{
+public interface BustripService{
     void insertBusTrip(BusTrip trip);
     List<BusTrip> findAll();
     BusTrip findOne(Long id);

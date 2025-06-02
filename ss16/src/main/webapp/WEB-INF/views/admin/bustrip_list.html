@@ -9,7 +9,7 @@
     <h2 class="text-2xl font-semibold mb-4">Danh sách chuyến xe</h2>
 
     <a class="inline-block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mb-4 transition"
-       th:href="@{/admin/trip/add}">Thêm chuyến xe mới</a>
+       th:href="@{/admin/bustrip/add}">Thêm chuyến xe mới</a>
 
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white border border-gray-300 shadow-sm">
@@ -26,20 +26,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="trip : ${trips}" class="border-t hover:bg-gray-50">
-                <td class="px-4 py-2 border" th:text="${trip.departure}"></td>
-                <td class="px-4 py-2 border" th:text="${trip.destination}"></td>
-                <td class="px-4 py-2 border" th:text="${#temporals.format(trip.departureTime, 'dd/MM/yyyy HH:mm')}"></td>
-                <td class="px-4 py-2 border" th:text="${#temporals.format(trip.arrivalTime, 'dd/MM/yyyy HH:mm')}"></td>
-                <td class="px-4 py-2 border" th:text="${trip.busId}"></td>
-                <td class="px-4 py-2 border" th:text="${trip.seatsAvailable}"></td>
+            <tr th:each="bustrip : ${bustrips}" class="border-t hover:bg-gray-50">
+                <td class="px-4 py-2 border" th:text="${bustrip.departure}"></td>
+                <td class="px-4 py-2 border" th:text="${bustrip.destination}"></td>
+                <td class="px-4 py-2 border" th:text="${#temporals.format(bustrip.departureTime, 'dd/MM/yyyy HH:mm')}"></td>
+                <td class="px-4 py-2 border" th:text="${#temporals.format(bustrip.arrivalTime, 'dd/MM/yyyy HH:mm')}"></td>
+                <td class="px-4 py-2 border" th:text="${bustrip.busId}"></td>
+                <td class="px-4 py-2 border" th:text="${bustrip.seatsAvailable}"></td>
                 <td class="px-4 py-2 border text-center">
-                    <img th:src="${trip.image}" class="w-16 h-auto mx-auto" alt="Bus image"/>
+                    <img th:src="${bustrip.image}" class="w-16 h-auto mx-auto" alt="Bus image"/>
                 </td>
                 <td class="px-4 py-2 border text-center space-x-2">
-                    <a th:href="@{|/admin/trip/edit/${trip.id}|}"
+                    <a th:href="@{|/admin/bustrip/edit/${bustrip.id}|}"
                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition">Sửa</a>
-                    <a th:href="@{|/admin/trip/delete/${trip.id}|}"
+                    <a th:href="@{|/admin/bustrip/delete/${bustrip.id}|}"
                        onclick="return confirm('Bạn chắc chắn?')"
                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition">Xóa</a>
                 </td>
