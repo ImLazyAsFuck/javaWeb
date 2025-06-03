@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-6 text-center">Register</h1>
+
+    <form th:action="@{/register}" method="post" th:object="${registerDto}" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Username</label>
+            <input type="text" th:field="*{username}" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+            <p th:if="${#fields.hasErrors('username')}" th:text="${#fields.errors('username')[0]}" class="text-red-500 text-sm"></p>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" th:field="*{password}" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+            <p th:if="${#fields.hasErrors('password')}" th:text="${#fields.errors('password')[0]}" class="text-red-500 text-sm"></p>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="text" th:field="*{email}" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+            <p th:if="${#fields.hasErrors('email')}" th:text="${#fields.errors('email')[0]}" class="text-red-500 text-sm"></p>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Phone</label>
+            <input type="text" th:field="*{phone}" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+            <p th:if="${#fields.hasErrors('phone')}" th:text="${#fields.errors('phone')[0]}" class="text-red-500 text-sm"></p>
+        </div>
+
+        <div>
+            <span>Already have an account?</span>
+            <a class="text-blue-600 underline" href="/login">Login</a>
+        </div>
+
+        <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
+            Register
+        </button>
+    </form>
+</div>
+
+</body>
+</html>

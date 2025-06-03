@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+<a href="/cart">Cart</a>
+<div th:each="product : ${products}">
+    <h3 th:text="${product.productName}"></h3>
+    <p th:text="${product.description}"></p>
+    <p>Giá: <span th:text="${product.price}"></span></p>
+
+    <a th:href="@{'/user/product/' + ${product.id}}">
+        <button>Buy</button>
+    </a>
+    <hr>
+</div>
+
+
+<div>
+    <span th:if="${currentPage > 0}">
+        <a th:href="@{/(page=${currentPage - 1})}">Trước</a>
+    </span>
+
+    <span th:text="'Trang ' + ${currentPage + 1} + '/' + ${totalPages}"></span>
+
+    <span th:if="${currentPage + 1 < totalPages}">
+        <a th:href="@{/(page=${currentPage + 1})}">Sau</a>
+    </span>
+</div>
+
+</body>
+</html>

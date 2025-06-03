@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Detail</title>
+</head>
+<body>
+<form th:action="@{/user/product/{id}(id=${product.id})}" method="post">
+    <h3 th:text="${product.productName}"></h3>
+    <p th:text="${product.description}"></p>
+    <p>Giá: <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></span> VND</p>
+    <button type="submit">Add to cart</button>
+    <hr>
+</form>
+<a href="/user/home">Back</a>
+</body>
+</html>
