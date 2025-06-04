@@ -13,8 +13,8 @@ public class ProductCartServiceImpl implements ProductCartService{
     private ProductCartRepo productCartRepo;
 
     @Override
-    public List<ProductCart> findAll(){
-        return productCartRepo.findAll();
+    public List<ProductCart> findByCustomerId(int customerId){
+        return productCartRepo.findByCustomerId(customerId);
     }
 
     @Override
@@ -28,22 +28,12 @@ public class ProductCartServiceImpl implements ProductCartService{
     }
 
     @Override
-    public ProductCart findById(int id){
-       return productCartRepo.findById(id);
-    }
-
-    @Override
     public ProductCart findByCustomerIdAndProductId(int customerId, int productId){
         return productCartRepo.findByCustomerIdAndProductId(customerId, productId);
     }
 
     @Override
-    public void update(ProductCart productCart){
-        productCartRepo.update(productCart);
-    }
-
-    @Override
-    public List<ProductCart> findByCustomerId(int customerId){
-        return productCartRepo.findByCustomerId(customerId);
+    public void deleteCartToEmpty(int customerId){
+        productCartRepo.deleteCartToEmpty(customerId);
     }
 }

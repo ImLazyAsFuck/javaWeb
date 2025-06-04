@@ -1,10 +1,13 @@
 package com.ss17.config;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -14,6 +17,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.persistence.EntityManager;
+import java.util.Map;
 
 @Configuration
 @EnableWebMvc
@@ -58,4 +62,20 @@ public class AppConfig implements WebMvcConfigurer{
         return sessionFactory().createEntityManager();
     }
 
+    @Bean
+    public Cloudinary cloudinary(){
+        Map<String, String> config = ObjectUtils.asMap(
+                "cloud_name", "dyvpntnlo",
+                "api_key", "647263875169227",
+                "api_secret", "BZAtIGwSN0iKlvBtkMHjm_NmqDE"
+        );
+        return new Cloudinary(config);
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver(){
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSize(-1);
+        return resolver;
+    }
 }

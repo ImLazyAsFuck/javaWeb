@@ -20,5 +20,7 @@
         <mapping class="com.ss17.entity.Customer"/>
         <mapping class="com.ss17.entity.Product"/>
         <mapping class="com.ss17.entity.ProductCart"/>
+        <mapping class="com.ss17.entity.Order"/>
+        <mapping class="com.ss17.entity.OrderDetail"/>
     </session-factory>
 </hibernate-configuration>

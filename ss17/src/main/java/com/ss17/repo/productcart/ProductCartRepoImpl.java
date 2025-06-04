@@ -7,65 +7,54 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ProductCartRepoImpl implements ProductCartRepo{
-
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public List<ProductCart> findAll(){
-        Session session = sessionFactory.openSession();
-        List<ProductCart> productCarts = session.createQuery("from ProductCart", ProductCart.class).getResultList();
-        session.close();
+    public List<ProductCart> findByCustomerId(int customerId) {
+        List<ProductCart> productCarts = new ArrayList<>();
+        try(Session session = sessionFactory.openSession()){
+            productCarts = session.createQuery("FROM ProductCart WHERE customer.id = :customerId", ProductCart.class)
+                    .setParameter("customerId", customerId)
+                    .getResultList();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return productCarts;
     }
 
+
     @Override
     public void save(ProductCart productCart) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.save(productCart);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.saveOrUpdate(productCart);
+        transaction.commit();
+        session.close();
     }
+
 
     @Override
     public void delete(ProductCart productCart){
-        Transaction transaction = null;
-        try(Session session = sessionFactory.openSession()){
-            transaction = session.beginTransaction();
-            session.delete(productCart);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public ProductCart findById(int id){
         Session session = sessionFactory.openSession();
-        ProductCart productCart = session.get(ProductCart.class, id);
+        Transaction transaction = session.beginTransaction();
+        session.delete(productCart);
+        transaction.commit();
         session.close();
-        return productCart;
     }
 
     @Override
     public ProductCart findByCustomerIdAndProductId(int customerId, int productId) {
         Session session = sessionFactory.openSession();
         ProductCart result = session.createQuery(
-                        "from ProductCart where customerId = :customerId and productId = :productId", ProductCart.class)
+                        "FROM ProductCart pc WHERE pc.customer.id = :customerId AND pc.product.id = :productId",
+                        ProductCart.class
+                )
                 .setParameter("customerId", customerId)
                 .setParameter("productId", productId)
                 .uniqueResult();
@@ -74,22 +63,21 @@ public class ProductCartRepoImpl implements ProductCartRepo{
     }
 
     @Override
-    public void update(ProductCart productCart) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.update(productCart);
-        session.getTransaction().commit();
-        session.close();
+    public void deleteCartToEmpty(int customerId){
+        Transaction transaction = null;
+        try(Session session = sessionFactory.openSession()){
+            transaction = session.beginTransaction();
+            session.createQuery("DELETE FROM ProductCart WHERE customer.id = :customerId")
+                    .setParameter("customerId", customerId)
+                    .executeUpdate();
+            transaction.commit();
+        }catch(Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
-    @Override
-    public List<ProductCart> findByCustomerId(int customerId){
-        Session session = sessionFactory.openSession();
-        List<ProductCart> productCarts = session.createQuery(
-                "from ProductCart where customerId = :customerId", ProductCart.class)
-                .setParameter("customerId", customerId)
-                .getResultList();
-        session.close();
-        return productCarts;
-    }
+
 }

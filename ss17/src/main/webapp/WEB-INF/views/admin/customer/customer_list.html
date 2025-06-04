@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Management</title>
+</head>
+<body>
+<div th:replace="fragment/admin_sidebar :: sidebar"></div>
+
+<h1>Customer Management</h1>
+
+<form method="get" th:action="@{/admin/customer}">
+    <input type="text" name="name" placeholder="Search by username" th:value="${param.username}">
+
+
+    <button type="submit">Search</button>
+</form>
+
+<!-- 📋 Bảng dữ liệu -->
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.username}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.phone}"></td>
+        <td th:text="${customer.role}"></td>
+        <td th:text="${customer.status ? 'Active' : 'Inactive'}"></td>
+        <td th:if="${customer.role == T(com.ss17.model.CustomerRole).USER}">
+            <form th:action="@{/admin/customer/status}" method="post" style="display: inline;">
+                <input type="hidden" name="id" th:value="${customer.id}" />
+                <input type="hidden" name="status" th:value="${!customer.status}" />
+                <button type="submit" onclick="return confirm('Bạn có chắc muốn thay đổi trạng thái khách hàng này không?');">
+                    Change status
+                </button>
+            </form>
+        </td>
+        <td th:if="${customer.role == T(com.ss17.model.CustomerRole).ADMIN}">
+            Can't change status
+        </td>
+
+
+    </tr>
+    <tr th:if="${customers.size() == 0}">
+        <td colspan="6">No customers found.</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ⏭️ Phân trang -->
+<div th:if="${totalPages > 1}">
+    <span th:if="${currentPage > 1}">
+        <a th:href="@{/admin/customers(page=${currentPage - 1}, username=${param.username}, role=${param.role})}">Previous</a>
+    </span>
+
+    <span>Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
+
+    <span th:if="${currentPage < totalPages}">
+        <a th:href="@{/admin/customers(page=${currentPage + 1}, username=${param.username}, role=${param.role})}">Next</a>
+    </span>
+</div>
+</body>
+</html>

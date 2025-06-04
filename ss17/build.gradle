@@ -46,6 +46,11 @@ dependencies {
 
     implementation 'org.slf4j:slf4j-simple:1.7.36'
 
+    implementation 'commons-fileupload:commons-fileupload:1.4'
+    implementation 'com.cloudinary:cloudinary-core:1.38.0'
+// https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44
+    implementation 'com.cloudinary:cloudinary-http44:1.32.2'
+
     // mysql connector
     implementation 'mysql:mysql-connector-java:8.0.30'
 }

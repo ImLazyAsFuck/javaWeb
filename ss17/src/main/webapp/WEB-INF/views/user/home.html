@@ -1,37 +1,53 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+    <script>
+        const handleLogout = () => {
+            return confirm('Are you sure you want to logout?');
+        }
+    </script>
 </head>
-<body>
-<a href="/cart">Cart</a>
-<div th:each="product : ${products}">
-    <h3 th:text="${product.productName}"></h3>
-    <p th:text="${product.description}"></p>
-    <p>Giá: <span th:text="${product.price}"></span></p>
+<body class="bg-gray-100 text-gray-800">
 
-    <a th:href="@{'/user/product/' + ${product.id}}">
-        <button>Buy</button>
-    </a>
-    <hr>
-</div>
+<header class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-blue-600">My Shop</h1>
+    <div class="space-x-4">
+        <a href="/cart" class="text-sm text-gray-700 hover:text-blue-500">Cart</a>
+        <a href="/profile" class="text-sm text-gray-700 hover:text-blue-500">Profile</a>
+        <span onclick="handleLogout()" class="cursor-pointer text-sm text-gray-700 hover:text-blue-500">Logout</span>
+    </div>
+</header>
 
+<main class="p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div th:each="product : ${products}" class="bg-white p-4 rounded shadow-md">
+            <h3 class="text-lg font-semibold text-gray-800" th:text="${product.productName}">Tên sản phẩm</h3>
+            <p class="text-gray-600 mt-2" th:text="${product.description}">Mô tả</p>
+            <p class="text-red-500 font-bold mt-2">Giá: <span th:text="${product.price}">100.000đ</span></p>
+            <a th:href="@{'/user/product/' + ${product.id}}" class="inline-block mt-4">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Buy</button>
+            </a>
+        </div>
+    </div>
 
-<div>
-    <span th:if="${currentPage > 0}">
-        <a th:href="@{/(page=${currentPage - 1})}">Trước</a>
-    </span>
+    <div th:if="${totalPages > 1}" class="mt-8 text-center">
+        <span th:if="${currentPage > 0}">
+            <a th:href="@{/(page=${currentPage - 1})}" class="text-blue-500 hover:underline mx-2">Trước</a>
+        </span>
 
-    <span th:text="'Trang ' + ${currentPage + 1} + '/' + ${totalPages}"></span>
+        <span th:text="'Trang ' + ${currentPage + 1} + '/' + ${totalPages}" class="text-gray-700 mx-2">Trang 1/5</span>
 
-    <span th:if="${currentPage + 1 < totalPages}">
-        <a th:href="@{/(page=${currentPage + 1})}">Sau</a>
-    </span>
-</div>
+        <span th:if="${currentPage + 1 < totalPages}">
+            <a th:href="@{/(page=${currentPage + 1})}" class="text-blue-500 hover:underline mx-2">Sau</a>
+        </span>
+    </div>
+</main>
 
 </body>
 </html>

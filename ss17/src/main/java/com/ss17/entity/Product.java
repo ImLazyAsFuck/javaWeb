@@ -24,13 +24,15 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false, columnDefinition = "DOUBLE NOT NULL CHECK (price > 0)")
+    @Column(nullable = false, columnDefinition = "DOUBLE CHECK (price > 0)")
     private double price;
 
-    @Column(nullable = false, columnDefinition = "INT CHECK (stock > 0)")
+    @Column(nullable = false)
     private int stock;
 
     private String image;
+
+
 }
 
 

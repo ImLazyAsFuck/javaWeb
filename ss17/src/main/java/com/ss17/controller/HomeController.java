@@ -23,11 +23,25 @@ public class HomeController{
     @Autowired
     private ProductCartService productCartService;
 
+    @GetMapping
+    public String index(){
+        return "redirect:/user/home";
+    }
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "redirect:/admin/home";
+    }
+
     @GetMapping("/home")
     public String home(Model model,
-                       @RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "1") int page,
                        @RequestParam(defaultValue = "5") int size) {
         if(session.getAttribute("customer") == null){
+            return "redirect:/login";
+        }
+        Customer customer = (Customer) session.getAttribute("customer");
+        if(customer == null){
             return "redirect:/login";
         }
         List<Product> products = productService.findAll(page, size);
@@ -55,31 +69,23 @@ public class HomeController{
     }
 
     @PostMapping("/product/{id}")
-    public String addToCart(@PathVariable int id) {
-        Product product = productService.findById(id);
+    public String addToCart(@PathVariable int id, Model model){
         Customer customer = (Customer) session.getAttribute("customer");
-
-        if (customer == null || product == null) {
+        if(customer == null){
             return "redirect:/login";
         }
-
-        int customerId = customer.getId();
-        int productId = product.getId();
-
-        ProductCart existingCart = productCartService.findByCustomerIdAndProductId(customerId, productId);
-
-        if (existingCart != null) {
-            existingCart.setQuantity(existingCart.getQuantity() + 1);
-            productCartService.update(existingCart);
-        } else {
-            ProductCart productCart = new ProductCart();
-            productCart.setCustomerId(customerId);
-            productCart.setProductId(productId);
-            productCart.setQuantity(1);
-            productCartService.save(productCart);
+        Product product = productService.findById(id);
+        if(product == null){
+            return "redirect:/user/home";
         }
-
-        return "redirect:/user/home";
+        ProductCart productCart = productCartService.findByCustomerIdAndProductId(customer.getId(), product.getId());
+        if(productCart == null){
+            productCart = new ProductCart(0, customer, product, 1);
+            productCartService.save(productCart);
+            return "redirect:/user/product/" + id;
+        }
+        productCart.setQuantity(productCart.getQuantity() + 1);
+        productCartService.save(productCart);
+        return "redirect:/user/product/" + id;
     }
-
 }

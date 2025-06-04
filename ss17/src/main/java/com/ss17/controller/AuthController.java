@@ -56,31 +56,33 @@ public class AuthController{
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginDto loginDto, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()){
+    public String login(@Valid @ModelAttribute LoginDto loginDto,
+                        BindingResult bindingResult,
+                        Model model,
+                        HttpSession session) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("loginDto", loginDto);
             return "auth/login";
         }
+
         Customer customer = customerService.login(loginDto.getUsername(), loginDto.getPassword());
-        if(customer == null){
+
+        if (customer == null) {
             model.addAttribute("wrong", "Wrong username or password");
+            model.addAttribute("loginDto", loginDto);
             return "auth/login";
         }
         session.setAttribute("customer", customer);
-        if(customer.getRole() == CustomerRole.USER){
-            return "redirect:/user/home";
+        if(customer.getRole() == CustomerRole.ADMIN){
+            return "redirect:/admin/home";
         }
         return "redirect:/user/home";
     }
 
-    @GetMapping("/admin/home")
-    public String adminHome(){
-        return "admin/home";
-    }
 
     @GetMapping("/logout")
     public String logout(){
-        session.invalidate();
+        session.removeAttribute("customer");
         return "redirect:/login";
     }
 

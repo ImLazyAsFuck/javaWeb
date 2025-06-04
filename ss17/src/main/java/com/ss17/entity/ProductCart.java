@@ -8,23 +8,27 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product_cart", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"customerId", "productId"})
-})
+@Table(
+        name = "product_cart",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"customer_id", "product_id"})}
+)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    private int customerId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @Column(nullable = false)
-    private int productId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Column(nullable = false)
     private int quantity;

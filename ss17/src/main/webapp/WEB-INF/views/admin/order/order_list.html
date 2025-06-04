@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý đơn hàng</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="fragment/admin_sidebar :: sidebar"></div>
+<h1>Danh sách đơn hàng</h1>
+
+<form method="get">
+    <input type="text" name="receiverName" th:value="${receiverName}" placeholder="Tên người nhận">
+    <input type="date" name="orderDate" th:value="${#dates.format(orderDate, 'yyyy-MM-dd')}">
+    <select name="status">
+        <option value="">-- Tất cả --</option>
+        <option th:each="s : ${orderStatuses}" th:value="${s.name()}" th:text="${s.name()}" th:selected="${s.name() == status}"></option>
+    </select>
+    <button type="submit">Tìm</button>
+</form>
+
+<table th:border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên người nhận</th>
+        <th>Trạng thái</th>
+        <th>Tổng tiền</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.recipientName}"></td>
+        <td th:text="${order.status}"></td>
+        <td th:text="${order.totalMoney}"></td>
+        <td>
+            <form th:action="@{'/admin/order/' + ${order.id} + '/confirm'}" method="post" th:if="${order.status.name() == 'PENDING'}">
+                <button>Xác nhận</button>
+            </form>
+            <form th:action="@{'/admin/order/' + ${order.id} + '/cancel'}" method="post" th:if="${order.status.name() != 'CANCELLED' && order.status.name() != 'DELIVERED'}">
+                <button>Hủy</button>
+            </form>
+            <form th:action="@{'/admin/order/' + ${order.id} + '/next'}" method="post" th:if="${order.status.name() != 'DELIVERED' && order.status.name() != 'CANCELLED'}">
+                <button>Tiến trạng thái</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:if="${totalOrders > 1}">
+    <span th:text="'Trang ' + (${currentPage} + 1) + ' / ' + (${totalOrders} / ${pageSize} + 1)"></span>
+    <div>
+        <a th:if="${currentPage > 0}"
+           th:href="@{/admin/orders(page=${currentPage - 1}, receiverName=${receiverName}, orderDate=${#dates.format(orderDate, 'yyyy-MM-dd')}, status=${status})}">
+            Trang trước
+        </a>
+        <a th:if="${(currentPage + 1) * pageSize < totalOrders}"
+           th:href="@{/admin/orders(page=${currentPage + 1}, receiverName=${receiverName}, orderDate=${#dates.format(orderDate, 'yyyy-MM-dd')}, status=${status})}">
+            Trang sau
+        </a>
+    </div>
+</div>
+</body>
+</html>

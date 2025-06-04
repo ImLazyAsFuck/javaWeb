@@ -5,11 +5,9 @@ import com.ss17.entity.ProductCart;
 import java.util.List;
 
 public interface ProductCartService{
-    List<ProductCart> findAll();
+    List<ProductCart> findByCustomerId(int customerId);
     void save(ProductCart productCart);
     void delete(ProductCart productCart);
-    ProductCart findById(int id);
     ProductCart findByCustomerIdAndProductId(int customerId, int productId);
-    void update(ProductCart productCart);
-    List<ProductCart> findByCustomerId(int customerId);
+    void deleteCartToEmpty(int customerId);
 }

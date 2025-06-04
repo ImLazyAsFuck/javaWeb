@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h2>Xin chào, <span th:text="${customer.name}">Tên</span></h2>
+
+<form action="/profile/update" method="post">
+    <input name="name" th:value="${customer.name}" />
+    <input name="email" th:value="${customer.email}" />
+    <button type="submit">Cập nhật</button>
+</form>
+
+<h3>Lịch sử đơn hàng</h3>
+<table>
+    <tr>
+        <th>Mã đơn</th><th>Ngày</th><th>Trạng thái</th><th>Hành động</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.date}"></td>
+        <td th:text="${order.status}"></td>
+        <td>
+            <form th:action="@{/profile/cancel-order}" method="post">
+                <input type="hidden" name="orderId" th:value="${order.id}" />
+                <button type="submit" th:if="${order.status != 'Canceled'}">Hủy</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div th:if="${totalPages > 1}">
+    <a th:href="@{'/profile?page=' + ${currentPage - 1}}" th:if="${currentPage > 1}">Trang trước</a>
+
+    <span>Trang <span th:text="${currentPage}"></span> / <span th:text="${totalPages}"></span></span>
+
+    <a th:href="@{'/profile?page=' + ${currentPage + 1}}" th:if="${currentPage < totalPages}">Trang sau</a>
+</div>
+
+</body>
+</html>

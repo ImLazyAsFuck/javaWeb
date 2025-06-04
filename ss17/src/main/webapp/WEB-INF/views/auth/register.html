@@ -17,7 +17,7 @@
         <div>
             <label class="block text-sm font-medium text-gray-700">Username</label>
             <input type="text" th:field="*{username}" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-200">
-            <p th:if="${#fields.hasErrors('username')}" th:text="${#fields.errors('username')[0]}" class="text-red-500 text-sm"></p>
+            <p style="color:#f00;" th:if="${#fields.hasErrors('username')}" th:text="${#fields.errors('username')[0]}" class="text-red-500 text-sm"></p>
         </div>
 
         <div>
