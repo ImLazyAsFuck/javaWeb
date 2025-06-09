@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Seed List</h1>
+<a href="seed/list">Add Seed</a>
+<table th:border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Stock</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${seed.id}"></td>
+        <td th:text="${seed.name}"></td>
+        <td>
+            <img th:src="@{${seed.image}}" width="100" height="100" alt="${seed.name}">
+        </td>
+        <td th:text="${seed.price}"></td>
+        <td th:text="${seed.description}"></td>
+        <td th:text="${seed.stock}"></td>
+        <td>
+            <a href="seed/edit/{id}">Edit</a>
+            <form onsubmit="return confirm('You sure to delete this seed?')" action="seed/delete" method="get">
+                <input type="submit" >Delete</input>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

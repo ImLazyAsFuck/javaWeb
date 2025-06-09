@@ -88,17 +88,16 @@ import java.util.List;
             if (order != null) {
                 order.setStatus(status);
             }
+            assert order != null;
             order.setStatus(status);
             orderService.save(order);
         }
 
         public void moveToNextStatus(int id) {
             Order order = orderService.findById(id);
-            if (order != null) {
-                order.setStatus(OrderStatus.DELIVERED);
-            }
-            OrderStatus current = order.getStatus();
+            if (order == null) return;
 
+            OrderStatus current = order.getStatus();
             switch(current){
                 case PENDING:
                     order.setStatus(OrderStatus.CONFIRMED);
@@ -115,6 +114,7 @@ import java.util.List;
 
             orderService.save(order);
         }
+
 
     }
 

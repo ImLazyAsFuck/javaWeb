@@ -164,7 +164,6 @@ public class ProductController{
         }
 
         if (bindingResult.hasErrors()) {
-//            model.addAttribute("product", productDto);
             return "admin/product/edit_product";
         }
 
